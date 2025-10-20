@@ -57,7 +57,6 @@ function buildSelectionControls() {
   OPERATING_SYSTEMS.forEach(({ key, label, description }) => {
     const wrapper = document.createElement('label');
     wrapper.className = 'os-option';
-    wrapper.title = description;
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
@@ -66,10 +65,17 @@ function buildSelectionControls() {
     checkbox.checked = true;
     checkbox.setAttribute('aria-label', label);
 
+    const content = document.createElement('div');
     const title = document.createElement('span');
+    title.className = 'os-title';
     title.textContent = label;
 
-    wrapper.append(checkbox, title);
+    const subtitle = document.createElement('span');
+    subtitle.className = 'os-description';
+    subtitle.textContent = description;
+
+    content.append(title, subtitle);
+    wrapper.append(checkbox, content);
     fragment.append(wrapper);
   });
 
@@ -127,16 +133,13 @@ function initChart() {
     },
     options: {
       responsive: true,
-      maintainAspectRatio: true,
-      aspectRatio: 1.8,
+      maintainAspectRatio: false,
       scales: {
         y: {
-          type: 'linear',
-          min: 0,
+          beginAtZero: true,
           max: 100,
           ticks: {
             callback: (value) => `${value}%`,
-            stepSize: 10,
           },
           title: {
             display: true,

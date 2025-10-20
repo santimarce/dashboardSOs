@@ -25,20 +25,22 @@
     </header>
 
     <main class="dashboard">
-      <section class="dashboard-card">
-        <header class="card-header">
-          <h2>Porcentaje de usuarios por año</h2>
-          <p class="chart-description">
-            Datos basados en estimaciones históricas para fines demostrativos.
-          </p>
-        </header>
-
+      <section class="controls">
+        <h2>Selecciona los sistemas operativos</h2>
         <form id="os-selection" class="os-selection" aria-label="Selecciona sistemas operativos">
           <!-- Los controles se insertan dinámicamente -->
         </form>
         <p class="hint">Puedes elegir entre 1 y 3 sistemas operativos.</p>
+      </section>
 
-        <div class="chart-wrapper">
+      <section class="chart-panel">
+        <div class="chart-card">
+          <header>
+            <h2>Porcentaje de usuarios por año</h2>
+            <p class="chart-description">
+              Datos basados en estimaciones históricas para fines demostrativos.
+            </p>
+          </header>
           <canvas id="os-chart" aria-label="Gráfico de evolución de sistemas operativos"></canvas>
         </div>
       </section>
