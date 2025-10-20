@@ -1,0 +1,163 @@
+:root {
+  color-scheme: light dark;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  --color-bg: #f4f6fb;
+  --color-surface: #ffffff;
+  --color-border: #d9deea;
+  --color-primary: #274690;
+  --color-secondary: #0091d5;
+  --color-text: #1d1f2f;
+  --color-muted: #5f6b8a;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header,
+.app-footer {
+  padding: 2rem clamp(1.5rem, 5vw, 4rem);
+  text-align: center;
+}
+
+.app-header {
+  background: linear-gradient(135deg, rgba(39, 70, 144, 0.95), rgba(0, 145, 213, 0.85));
+  color: #fff;
+}
+
+.app-header h1 {
+  margin-bottom: 0.5rem;
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
+  font-weight: 700;
+}
+
+.app-header p {
+  margin: 0 auto;
+  max-width: 60ch;
+  font-size: 1rem;
+  opacity: 0.95;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: clamp(2rem, 5vw, 4rem);
+  flex: 1;
+}
+
+.controls {
+  background-color: var(--color-surface);
+  border-radius: 1.25rem;
+  border: 1px solid var(--color-border);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: 0 20px 40px -24px rgba(39, 70, 144, 0.35);
+}
+
+.controls h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.os-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.os-selection label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  background-color: #f7f9ff;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.os-selection input[type='checkbox'] {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--color-primary);
+}
+
+.os-selection label:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -14px rgba(39, 70, 144, 0.5);
+}
+
+.os-selection label:has(input:checked) {
+  border-color: var(--color-primary);
+  background: rgba(39, 70, 144, 0.1);
+}
+
+.hint {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.chart-panel {
+  display: flex;
+  align-items: stretch;
+}
+
+.chart-card {
+  background-color: var(--color-surface);
+  border-radius: 1.25rem;
+  border: 1px solid var(--color-border);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  box-shadow: 0 24px 48px -28px rgba(39, 70, 144, 0.4);
+}
+
+.chart-card header h2 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.chart-description {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.app-footer {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  background-color: #eef1f8;
+}
+
+@media (max-width: 600px) {
+  .controls,
+  .chart-card {
+    padding: 1.5rem;
+  }
+}
