@@ -108,7 +108,6 @@ function updateChart() {
   const selectedKeys = getSelectedKeys();
 
   if (selectedKeys.length === 0) {
-    // Evita quedar sin selección reactivando la última opción interactuada
     const lastCheckbox = selectionForm.querySelector('input[type="checkbox"]:not(:checked)');
     if (lastCheckbox) {
       lastCheckbox.checked = true;
@@ -181,6 +180,96 @@ function setupInteractions() {
     updateChart();
   });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const ctx = document.getElementById('os-chart').getContext('2d');
+
+  const years = Array.from({ length: 24 }, (_, i) => 2001 + i);
+
+  const data = {
+    labels: years,
+    datasets: [
+      {
+        label: 'Windows',
+        data: [95, 94, 93, 92, 90, 88, 85, 82, 78, 75, 72, 70, 68, 65, 62, 60, 58, 55, 53, 51, 49, 47, 45, 43],
+        borderColor: '#1f77b4',
+        backgroundColor: '#1f77b4',
+        fill: false,
+        tension: 0.2,
+        pointStyle: 'circle',
+        pointRadius: 6,
+        pointHoverRadius: 8,
+      },
+      {
+        label: 'macOS',
+        data: [3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
+        borderColor: '#ff7f0e',
+        backgroundColor: '#ff7f0e',
+        fill: false,
+        tension: 0.2,
+        pointStyle: 'circle',
+        pointRadius: 6,
+        pointHoverRadius: 8,
+      },
+      {
+        label: 'Linux',
+        data: [2, 3, 4, 5, 6, 7, 9, 11, 14, 16, 19, 20, 21, 23, 25, 26, 27, 29, 30, 31, 32, 33, 34, 35],
+        borderColor: '#2ca02c',
+        backgroundColor: '#2ca02c',
+        fill: false,
+        tension: 0.2,
+        pointStyle: 'circle',
+        pointRadius: 6,
+        pointHoverRadius: 8,
+      },
+    ]
+  };
+
+  const config = {
+    type: 'line',
+    data,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+          labels: {
+            usePointStyle: true,
+            pointStyle: 'circle',
+            padding: 20,
+            boxWidth: 12
+          },
+        },
+        tooltip: {
+          mode: 'index',
+          intersect: false
+        }
+      },
+      elements: {
+        line: {
+          borderWidth: 2
+        },
+        point: {
+          hitRadius: 8
+        }
+      },
+      scales: {
+        x: {
+          title: { display: true, text: 'Año' },
+          ticks: { maxRotation: 0, autoSkip: true, maxTicksLimit: 12 }
+        },
+        y: {
+          beginAtZero: true,
+          max: 100,
+          title: { display: true, text: 'Porcentaje (%)' }
+        }
+      }
+    }
+  };
+  const osChart = new Chart(ctx, config);
+});
 
 buildSelectionControls();
 setupInteractions();
